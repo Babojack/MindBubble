@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     resizeCanvas();
   });
 
+  // Подключаем Lottie анимацию
   const lottieAnimation = lottie.loadAnimation({
     container: document.getElementById('lottieAnimation'),
     renderer: 'svg',
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
       saveBubblesToLocalStorage();
       closeModal();
     } else {
-      alert("Type it in and slap a priority on it, babe");
+      alert("Please enter text and select priority!");
     }
   }
 
@@ -205,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function animateBubbles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  //тут я перепутал местами Гравити И скет мод
+
     if (gravityMode) {
       drawBasketballHoop();
     }
@@ -275,26 +276,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const clickY = e.clientY;
 
     bubbles = bubbles.filter(bubble => {
-      const dist = Math.sqrt((clickX - bubble.x) ** 2 + (clickY - bubble.y) ** 2);
+      const distToBubbleCenter = Math.sqrt((clickX - bubble.x) ** 2 + (clickY - bubble.y) ** 2);
       const deleteButtonSize = bubble.radius / 3;
+
+      // Определяем координаты для кнопки удаления относительно бабла
       const deleteX = bubble.x - bubble.radius + deleteButtonSize;
       const deleteY = bubble.y - bubble.radius + deleteButtonSize;
 
-      if (dist < deleteButtonSize && Math.abs(clickX - deleteX) < deleteButtonSize && Math.abs(clickY - deleteY) < deleteButtonSize) {
-        return false;
+      const distToDeleteButton = Math.sqrt((clickX - deleteX) ** 2 + (clickY - deleteY) ** 2);
+
+      // Удаляем бабл, если нажата кнопка 'X'
+      if (distToDeleteButton < deleteButtonSize) {
+        return false; // Бабл удаляется
       }
 
-      if (dist < bubble.radius) {
+      // Перетаскиваем бабл, если нажали на сам бабл
+      if (distToBubbleCenter < bubble.radius) {
         draggedBubble = bubble;
         offsetX = clickX - bubble.x;
         offsetY = clickY - bubble.y;
       }
 
-      return true;
+      return true; // Бабл остаётся, если не удаляется
     });
 
     saveBubblesToLocalStorage();
-  });
+});
+
 
   canvas.addEventListener('mousemove', function (e) {
     if (draggedBubble) {
@@ -306,6 +314,54 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   canvas.addEventListener('mouseup', function () {
+    if (draggedBubble) {
+      draggedBubble.dx = (Math.random() - 0.5) * 5;
+      draggedBubble.dy = (Math.random() - 0.5) * 5;
+      draggedBubble = null;
+    }
+
+    saveBubblesToLocalStorage();
+  });
+
+  // Обработка сенсорных событий для мобильных устройств
+  canvas.addEventListener('touchstart', function (e) {
+    const touch = e.touches[0];
+    const touchX = touch.clientX;
+    const touchY = touch.clientY;
+
+    bubbles = bubbles.filter(bubble => {
+      const dist = Math.sqrt((touchX - bubble.x) ** 2 + (touchY - bubble.y) ** 2);
+      const deleteButtonSize = bubble.radius / 3;
+      const deleteX = bubble.x - bubble.radius + deleteButtonSize;
+      const deleteY = bubble.y - bubble.radius + deleteButtonSize;
+
+      if (dist < deleteButtonSize && Math.abs(touchX - deleteX) < deleteButtonSize && Math.abs(touchY - deleteY) < deleteButtonSize) {
+        return false;
+      }
+
+      if (dist < bubble.radius) {
+        draggedBubble = bubble;
+        offsetX = touchX - bubble.x;
+        offsetY = touchY - bubble.y;
+      }
+
+      return true;
+    });
+
+    saveBubblesToLocalStorage();
+  });
+
+  canvas.addEventListener('touchmove', function (e) {
+    if (draggedBubble) {
+      const touch = e.touches[0];
+      const moveX = touch.clientX;
+      const moveY = touch.clientY;
+      draggedBubble.x = moveX - offsetX;
+      draggedBubble.y = moveY - offsetY;
+    }
+  });
+
+  canvas.addEventListener('touchend', function () {
     if (draggedBubble) {
       draggedBubble.dx = (Math.random() - 0.5) * 5;
       draggedBubble.dy = (Math.random() - 0.5) * 5;

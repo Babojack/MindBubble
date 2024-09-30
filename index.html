@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindBubbles</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.13/lottie.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="bubbleCanvas"></canvas>
+  <div id="lottieAnimation"></div>
+
+  <div id="introModal">
+    <h2>Welcome to the Bubble World!</h2>
+    <p>
+      MindBubbles is a damn good place to capture all the thoughts that are distracting you.
+      <p>They can be of any type:</p>
+      <p>Do the laundry, buy something, reply to someone, call and annoy your friends, hug the cat," and so on. Write everything down here and prioritize your thoughts.</p>
+      <p>Want to delete your bubble? Set it to basketball mode and throw your balls inside 😉. Good luck!</p> </p>
+    <button id="closeIntro">Let me in!</button>
+  </div>
+
+  <div id="modalOverlay"></div>
+  <div id="modalForm">
+    <h3>Add a bubble</h3>
+    <input type="text" id="bubbleText" placeholder="What's shaking in your brain babe?"><br>
+    <div class="radio-group">
+      <p>Prioritize like a Boooss babe! Enter 0-100! No sneaky 101!</p>
+      <label><input type="radio" name="priority" value="50"> 50</label>
+      <label><input type="radio" name="priority" value="80"> 80</label>
+      <label><input type="radio" name="priority" value="100"> 100</label>
+      <label><input type="radio" name="priority" value="101"> 101</label>
+    </div>
+    <div class="modal-buttons">
+      <button id="submitBubble">Add it babe</button>
+      <button id="cancelBubble" class="cancel">Jesus! Cancle it</button>
+    </div>
+  </div>
+
+  <button id="basketballMode">Gravity Mode</button>
+  <button id="gravityMode">Basketball Mode</button>
+  <button id="addBubble">Add Bubble</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
