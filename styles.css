@@ -9,6 +9,21 @@ body {
     #f9bccc
   );
 }
+#introModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  text-align: center;
+  width: 80%;
+  max-width: 400px;
+}
+
 
 #bubbleCanvas {
   display: block;
@@ -146,7 +161,7 @@ label {
 
   input[type="text"] {
     font-size: 14px;
-    padding: 8px;
+    padding: 10px;
   }
 
   #modalForm {
@@ -183,4 +198,43 @@ label {
     padding: 10px;
     max-width: 260px;
   }
+}
+
+/* Скрываем меню и кнопки по умолчанию */
+#menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+}
+
+#menu button {
+  margin-bottom: 10px;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 30px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  /* Показываем гамбургер-меню на маленьком экране */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Прячем кнопки по умолчанию */
+  #gravityMode,
+  #basketballMode,
+  #addBubble {
+    display: none;
+  }
+
 }
