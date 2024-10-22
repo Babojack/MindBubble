@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const gravityStrength = 0.3;
   const bounceFactor = 0.7;
 
+  // Проверка ширины окна
+  if (window.innerWidth < 768) {
+    document.body.innerHTML = '<h1 style="text-align: center;">This application works only on desktop computers. Please use a PC to access it 😞</h1>'; // Показываем сообщение
+    return; // Прекращаем выполнение кода
+  }
+
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
