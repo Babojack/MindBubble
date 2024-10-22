@@ -10,6 +10,10 @@ body {
   );
 }
 
+body.lock-scroll {
+  overflow: hidden; /* Blockiert das Scrollen */
+}
+
 #introModal {
   position: fixed;
   top: 50%;
@@ -126,11 +130,11 @@ button.cancel:hover {
 
 .button-container {
   display: flex;
-  justify-content: space-around; /* Разделение кнопок */
+  justify-content: space-around; /* Buttons verteilen */
   position: fixed;
   top: 10px;
-  width: 100%; /* Кнопки занимают всю ширину */
-  z-index: 100; /* Обеспечение их отображения выше других элементов */
+  width: 100%; /* Buttons nehmen die volle Breite ein */
+  z-index: 100; /* Stellen Sie sicher, dass sie über anderen Elementen angezeigt werden */
 }
 
 @media (max-width: 768px) {

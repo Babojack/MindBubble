@@ -271,6 +271,30 @@ document.addEventListener('DOMContentLoaded', function () {
     requestAnimationFrame(animateBubbles);
   }
 
+  function lockScroll() {
+    document.body.style.overflow = 'hidden'; // Blockiert das Scrollen
+  }
+
+  function unlockScroll() {
+    document.body.style.overflow = ''; // Entsperrt das Scrollen
+  }
+
+  canvas.addEventListener('mousedown', function () {
+    lockScroll(); // Blockiert das Scrollen
+  });
+
+  canvas.addEventListener('mouseup', function () {
+    unlockScroll(); // Entsperrt das Scrollen
+  });
+
+  canvas.addEventListener('touchstart', function () {
+    lockScroll(); // Blockiert das Scrollen
+  });
+
+  canvas.addEventListener('touchend', function () {
+    unlockScroll(); // Entsperrt das Scrollen
+  });
+
   canvas.addEventListener('mousedown', function (e) {
     const clickX = e.clientX;
     const clickY = e.clientY;
