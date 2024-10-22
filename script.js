@@ -279,30 +279,26 @@ document.addEventListener('DOMContentLoaded', function () {
       const distToBubbleCenter = Math.sqrt((clickX - bubble.x) ** 2 + (clickY - bubble.y) ** 2);
       const deleteButtonSize = bubble.radius / 3;
 
-      // Определяем координаты для кнопки удаления относительно бабла
       const deleteX = bubble.x - bubble.radius + deleteButtonSize;
       const deleteY = bubble.y - bubble.radius + deleteButtonSize;
 
       const distToDeleteButton = Math.sqrt((clickX - deleteX) ** 2 + (clickY - deleteY) ** 2);
 
-      // Удаляем бабл, если нажата кнопка 'X'
       if (distToDeleteButton < deleteButtonSize) {
-        return false; // Бабл удаляется
+        return false; // Bubbles get deleted
       }
 
-      // Перетаскиваем бабл, если нажали на сам бабл
       if (distToBubbleCenter < bubble.radius) {
         draggedBubble = bubble;
         offsetX = clickX - bubble.x;
         offsetY = clickY - bubble.y;
       }
 
-      return true; // Бабл остаётся, если не удаляется
+      return true; // Bubble stays if not deleted
     });
 
     saveBubblesToLocalStorage();
-});
-
+  });
 
   canvas.addEventListener('mousemove', function (e) {
     if (draggedBubble) {
@@ -323,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function () {
     saveBubblesToLocalStorage();
   });
 
-  // Обработка сенсорных событий для мобильных устройств
+  // Touch event handling for mobile devices
   canvas.addEventListener('touchstart', function (e) {
     const touch = e.touches[0];
     const touchX = touch.clientX;

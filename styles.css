@@ -9,6 +9,7 @@ body {
     #f9bccc
   );
 }
+
 #introModal {
   position: fixed;
   top: 50%;
@@ -24,10 +25,9 @@ body {
   max-width: 400px;
 }
 
-
 #bubbleCanvas {
   display: block;
- background-image: linear-gradient(
+  background-image: linear-gradient(
     to bottom right,
     #91defe,
     #99c0f9,
@@ -109,7 +109,7 @@ button.cancel:hover {
   background-color: #c82333;
 }
 
-label {
+.label {
   font-size: 16px;
   margin-right: 10px;
 }
@@ -121,42 +121,22 @@ label {
 .modal-buttons {
   display: flex;
   justify-content: center;
-  gap: 10px; /* Увеличим расстояние между кнопками */
+  gap: 10px;
 }
 
-#gravityMode, #basketballMode, #addBubble {
+.button-container {
+  display: flex;
+  justify-content: space-around; /* Разделение кнопок */
   position: fixed;
   top: 10px;
-  left: 10px;
-  padding: 10px;
-  font-size: 16px;
-}
-
-#basketballMode {
-  left: 150px;
-}
-
-#addBubble {
-  left: 290px;
+  width: 100%; /* Кнопки занимают всю ширину */
+  z-index: 100; /* Обеспечение их отображения выше других элементов */
 }
 
 @media (max-width: 768px) {
   button {
     font-size: 14px;
     padding: 8px 16px;
-  }
-
-  #gravityMode, #basketballMode, #addBubble {
-    padding: 8px;
-    font-size: 14px;
-  }
-
-  #basketballMode {
-    left: 120px;
-  }
-
-  #addBubble {
-    left: 230px;
   }
 
   input[type="text"] {
@@ -176,19 +156,6 @@ label {
     padding: 6px 12px;
   }
 
-  #gravityMode, #basketballMode, #addBubble {
-    padding: 6px;
-    font-size: 12px;
-  }
-
-  #basketballMode {
-    left: 110px;
-  }
-
-  #addBubble {
-    left: 190px;
-  }
-
   input[type="text"] {
     font-size: 12px;
     padding: 6px;
@@ -198,43 +165,4 @@ label {
     padding: 10px;
     max-width: 260px;
   }
-}
-
-/* Скрываем меню и кнопки по умолчанию */
-#menu {
-  display: none;
-  flex-direction: column;
-  position: absolute;
-  top: 50px;
-  left: 10px;
-}
-
-#menu button {
-  margin-bottom: 10px;
-}
-
-.menu-toggle {
-  display: none;
-  font-size: 30px;
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  /* Показываем гамбургер-меню на маленьком экране */
-  .menu-toggle {
-    display: block;
-  }
-
-  /* Прячем кнопки по умолчанию */
-  #gravityMode,
-  #basketballMode,
-  #addBubble {
-    display: none;
-  }
-
 }
